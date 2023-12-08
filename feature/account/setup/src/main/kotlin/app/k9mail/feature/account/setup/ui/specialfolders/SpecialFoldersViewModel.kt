@@ -21,6 +21,7 @@ private const val CONTINUE_NEXT_DELAY = 1500L
 class SpecialFoldersViewModel(
     private val formUiModel: SpecialFoldersContract.FormUiModel,
     private val getSpecialFolderOptions: UseCase.GetSpecialFolderOptions,
+    private val validateSpecialFolderOptions: UseCase.ValidateSpecialFolderOptions,
     private val accountStateRepository: AccountDomainContract.AccountStateRepository,
     initialState: State = State(),
 ) : BaseViewModel<State, Event, Effect>(initialState),

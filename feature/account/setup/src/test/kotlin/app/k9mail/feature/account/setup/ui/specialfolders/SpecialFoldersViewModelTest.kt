@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.setup.ui.specialfolders
 
+import app.k9mail.core.common.domain.usecase.validation.ValidationResult
 import app.k9mail.core.ui.compose.testing.MainDispatcherRule
 import app.k9mail.core.ui.compose.testing.mvi.assertThatAndEffectTurbineConsumed
 import app.k9mail.core.ui.compose.testing.mvi.assertThatAndStateTurbineConsumed
@@ -299,6 +300,9 @@ class SpecialFoldersViewModelTest {
             getSpecialFolderOptions = {
                 delay(50)
                 getSpecialFolderOptions()
+            },
+            validateSpecialFolderOptions = {
+                ValidationResult.Success
             },
             accountStateRepository = accountStateRepository,
             initialState = initialState,
