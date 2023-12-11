@@ -2,7 +2,6 @@ package app.k9mail.feature.account.setup.ui.specialfolders
 
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOptions
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.fsck.k9.mail.FolderType
@@ -17,32 +16,32 @@ class SpecialFoldersFormStateMapperKtTest {
     fun `should map folders to form state and assign selected folders`() = runTest {
         val specialFolderOptions = SpecialFolderOptions(
             archiveSpecialFolderOptions = createFolderList(
-                SpecialSpecialFolderOption.Archive(
-                    createRemoteFolder("archive1"),
+                SpecialFolderOption.SpecialFolder(
+                    remoteFolder = createRemoteFolder("archive1"),
                     isAutomatic = true,
                 ),
             ),
             draftsSpecialFolderOptions = createFolderList(
-                SpecialSpecialFolderOption.Drafts(
-                    createRemoteFolder("drafts1"),
+                SpecialFolderOption.SpecialFolder(
+                    remoteFolder = createRemoteFolder("drafts1"),
                     isAutomatic = true,
                 ),
             ),
             sentSpecialFolderOptions = createFolderList(
-                SpecialSpecialFolderOption.Sent(
-                    createRemoteFolder("sent1"),
+                SpecialFolderOption.SpecialFolder(
+                    remoteFolder = createRemoteFolder("sent1"),
                     isAutomatic = true,
                 ),
             ),
             spamSpecialFolderOptions = createFolderList(
-                SpecialSpecialFolderOption.Spam(
-                    createRemoteFolder("spam1"),
+                SpecialFolderOption.SpecialFolder(
+                    remoteFolder = createRemoteFolder("spam1"),
                     isAutomatic = true,
                 ),
             ),
             trashSpecialFolderOptions = createFolderList(
-                SpecialSpecialFolderOption.Trash(
-                    createRemoteFolder("trash1"),
+                SpecialFolderOption.SpecialFolder(
+                    remoteFolder = createRemoteFolder("trash1"),
                     isAutomatic = true,
                 ),
             ),

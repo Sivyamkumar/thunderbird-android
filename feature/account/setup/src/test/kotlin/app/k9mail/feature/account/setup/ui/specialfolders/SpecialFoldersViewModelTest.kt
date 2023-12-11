@@ -12,7 +12,6 @@ import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOptions
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderSettings
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.Effect
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.Event
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormEvent
@@ -308,11 +307,26 @@ class SpecialFoldersViewModelTest {
 
         val REMOTE_FOLDER = RemoteFolder(FolderServerId("archive"), "archive", FolderType.ARCHIVE)
 
-        val SPECIAL_FOLDER_ARCHIVE = SpecialSpecialFolderOption.Archive(REMOTE_FOLDER)
-        val SPECIAL_FOLDER_DRAFTS = SpecialSpecialFolderOption.Drafts(REMOTE_FOLDER)
-        val SPECIAL_FOLDER_SENT = SpecialSpecialFolderOption.Sent(REMOTE_FOLDER)
-        val SPECIAL_FOLDER_SPAM = SpecialSpecialFolderOption.Spam(REMOTE_FOLDER)
-        val SPECIAL_FOLDER_TRASH = SpecialSpecialFolderOption.Trash(REMOTE_FOLDER)
+        val SPECIAL_FOLDER_ARCHIVE = SpecialFolderOption.SpecialFolder(
+            isAutomatic = false,
+            remoteFolder = REMOTE_FOLDER.copy(displayName = "Archive"),
+        )
+        val SPECIAL_FOLDER_DRAFTS = SpecialFolderOption.SpecialFolder(
+            isAutomatic = false,
+            remoteFolder = REMOTE_FOLDER.copy(displayName = "Drafts"),
+        )
+        val SPECIAL_FOLDER_SENT = SpecialFolderOption.SpecialFolder(
+            isAutomatic = false,
+            remoteFolder = REMOTE_FOLDER.copy(displayName = "Sent"),
+        )
+        val SPECIAL_FOLDER_SPAM = SpecialFolderOption.SpecialFolder(
+            isAutomatic = false,
+            remoteFolder = REMOTE_FOLDER.copy(displayName = "Spam"),
+        )
+        val SPECIAL_FOLDER_TRASH = SpecialFolderOption.SpecialFolder(
+            isAutomatic = false,
+            remoteFolder = REMOTE_FOLDER.copy(displayName = "Trash"),
+        )
 
         val SpecialFolderOptions = SpecialFolderOptions(
             archiveSpecialFolderOptions = listOf(

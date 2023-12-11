@@ -7,8 +7,8 @@ import app.k9mail.feature.account.common.data.InMemoryAccountStateRepository
 import app.k9mail.feature.account.common.domain.entity.AccountOptions
 import app.k9mail.feature.account.common.domain.entity.AccountState
 import app.k9mail.feature.account.common.domain.entity.AuthorizationState
+import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderSettings
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
 import app.k9mail.feature.account.setup.domain.entity.AccountUuid
 import app.k9mail.feature.account.setup.ui.createaccount.CreateAccountContract.Effect
@@ -147,36 +147,36 @@ class CreateAccountViewModelTest {
         val AUTHORIZATION_STATE = AuthorizationState("authorization state")
 
         val SPECIAL_FOLDER_SETTINGS = SpecialFolderSettings(
-            archiveSpecialFolderOption = SpecialSpecialFolderOption.Archive(
-                RemoteFolder(
+            archiveSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(
                     FolderServerId("archive folder"),
                     "archive folder",
                     FolderType.ARCHIVE,
                 ),
             ),
-            draftsSpecialFolderOption = SpecialSpecialFolderOption.Drafts(
-                RemoteFolder(
+            draftsSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(
                     FolderServerId("drafts folder"),
                     "drafts folder",
                     FolderType.DRAFTS,
                 ),
             ),
-            sentSpecialFolderOption = SpecialSpecialFolderOption.Sent(
-                RemoteFolder(
+            sentSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(
                     FolderServerId("sent folder"),
                     "sent folder",
                     FolderType.SENT,
                 ),
             ),
-            spamSpecialFolderOption = SpecialSpecialFolderOption.Spam(
-                RemoteFolder(
+            spamSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(
                     FolderServerId("spam folder"),
                     "spam folder",
                     FolderType.SPAM,
                 ),
             ),
-            trashSpecialFolderOption = SpecialSpecialFolderOption.Trash(
-                RemoteFolder(
+            trashSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(
                     FolderServerId("trash folder"),
                     "trash folder",
                     FolderType.TRASH,

@@ -3,8 +3,8 @@ package app.k9mail.feature.account.setup.domain.usecase
 import app.k9mail.feature.account.common.domain.entity.Account
 import app.k9mail.feature.account.common.domain.entity.AccountOptions
 import app.k9mail.feature.account.common.domain.entity.MailConnectionSecurity
+import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderSettings
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import app.k9mail.feature.account.setup.AccountSetupExternalContract.AccountCreator.AccountCreatorResult
 import assertk.assertThat
 import assertk.assertions.isEqualTo
@@ -80,20 +80,20 @@ class CreateAccountTest {
         const val AUTHORIZATION_STATE = "authorization state"
 
         val SPECIAL_FOLDER_SETTINGS = SpecialFolderSettings(
-            archiveSpecialFolderOption = SpecialSpecialFolderOption.Archive(
-                RemoteFolder(FolderServerId("archive"), "archive", FolderType.ARCHIVE),
+            archiveSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(FolderServerId("archive"), "archive", FolderType.ARCHIVE),
             ),
-            draftsSpecialFolderOption = SpecialSpecialFolderOption.Drafts(
-                RemoteFolder(FolderServerId("drafts"), "drafts", FolderType.DRAFTS),
+            draftsSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(FolderServerId("drafts"), "drafts", FolderType.DRAFTS),
             ),
-            sentSpecialFolderOption = SpecialSpecialFolderOption.Sent(
-                RemoteFolder(FolderServerId("sent"), "sent", FolderType.SENT),
+            sentSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(FolderServerId("sent"), "sent", FolderType.SENT),
             ),
-            spamSpecialFolderOption = SpecialSpecialFolderOption.Spam(
-                RemoteFolder(FolderServerId("spam"), "spam", FolderType.SPAM),
+            spamSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(FolderServerId("spam"), "spam", FolderType.SPAM),
             ),
-            trashSpecialFolderOption = SpecialSpecialFolderOption.Trash(
-                RemoteFolder(FolderServerId("trash"), "trash", FolderType.TRASH),
+            trashSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+                remoteFolder = RemoteFolder(FolderServerId("trash"), "trash", FolderType.TRASH),
             ),
         )
 

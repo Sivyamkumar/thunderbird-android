@@ -3,7 +3,6 @@ package app.k9mail.feature.account.setup.domain.usecase
 import app.k9mail.feature.account.common.domain.AccountDomainContract
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOptions
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import app.k9mail.feature.account.setup.domain.DomainContract.UseCase
 import com.fsck.k9.mail.FolderType
 import com.fsck.k9.mail.folders.FolderFetcher
@@ -66,13 +65,15 @@ class GetFoldersFolderOptions(
         isAutomatic: Boolean = false,
     ): SpecialFolderOption {
         return when (remoteFolder.type) {
-            FolderType.INBOX -> SpecialSpecialFolderOption.Inbox(remoteFolder, isAutomatic)
-            FolderType.OUTBOX -> SpecialSpecialFolderOption.Outbox(remoteFolder, isAutomatic)
-            FolderType.ARCHIVE -> SpecialSpecialFolderOption.Archive(remoteFolder, isAutomatic)
-            FolderType.DRAFTS -> SpecialSpecialFolderOption.Drafts(remoteFolder, isAutomatic)
-            FolderType.SENT -> SpecialSpecialFolderOption.Sent(remoteFolder, isAutomatic)
-            FolderType.SPAM -> SpecialSpecialFolderOption.Spam(remoteFolder, isAutomatic)
-            FolderType.TRASH -> SpecialSpecialFolderOption.Trash(remoteFolder, isAutomatic)
+            FolderType.INBOX,
+            FolderType.OUTBOX,
+            FolderType.ARCHIVE,
+            FolderType.DRAFTS,
+            FolderType.SENT,
+            FolderType.SPAM,
+            FolderType.TRASH,
+            -> SpecialFolderOption.SpecialFolder(isAutomatic, remoteFolder)
+
             FolderType.REGULAR -> SpecialFolderOption.Regular(remoteFolder)
         }
     }
