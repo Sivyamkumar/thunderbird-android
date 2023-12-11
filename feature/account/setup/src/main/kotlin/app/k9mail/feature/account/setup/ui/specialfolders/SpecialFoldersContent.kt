@@ -47,7 +47,7 @@ fun SpecialFoldersContent(
             state = rememberContentLoadingErrorViewState(state = state),
             loading = {
                 LoadingView(
-                    message = stringResource(id = R.string.account_setup_special_folders_validating_message),
+                    message = stringResource(id = R.string.account_setup_special_folders_loading_message),
                     modifier = Modifier.fillMaxWidth(),
                 )
             },
