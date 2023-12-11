@@ -13,6 +13,7 @@ import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormEvent
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.State
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.ViewModel
+import com.fsck.k9.logging.Timber
 import com.fsck.k9.mail.folders.FolderFetcherException
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
@@ -87,22 +88,12 @@ class SpecialFoldersViewModel(
         return try {
             getSpecialFolderOptions()
         } catch (exception: FolderFetcherException) {
+            Timber.e(exception, "Error while loading special folders")
             updateState { state ->
                 state.copy(
                     isLoading = false,
                     isSuccess = false,
                     error = SpecialFoldersContract.Failure.LoadFoldersFailed(exception.message ?: "unknown error"),
-                )
-            }
-            null
-        } catch (exception: IllegalStateException) {
-            updateState { state ->
-                state.copy(
-                    isLoading = false,
-                    isSuccess = false,
-                    error = SpecialFoldersContract.Failure.MissingIncomingServerSettings(
-                        exception.message ?: "unknown error",
-                    ),
                 )
             }
             null
@@ -128,11 +119,12 @@ class SpecialFoldersViewModel(
                     isLoading = false,
                 )
             }
-        } catch (e: Exception) {
+        } catch (exception: Exception) {
+            Timber.e(exception, "Error while saving special folders")
             updateState { state ->
                 state.copy(
                     isLoading = false,
-                    error = SaveFailed(e.message ?: "unknown error"),
+                    error = SaveFailed(exception.message ?: "unknown error"),
                 )
             }
             return

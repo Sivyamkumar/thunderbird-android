@@ -135,35 +135,6 @@ class SpecialFoldersViewModelTest {
     }
 
     @Test
-    fun `should change to error state when LoadSpecialFolders fails with missing incoming server settings`() = runTest {
-        val initialState = State(
-            isLoading = true,
-        )
-        val testSubject = createTestSubject(
-            formUiModel = FakeSpecialFoldersFormUiModel(),
-            getSpecialFolderOptions = {
-                throw IllegalStateException("No incoming server settings available")
-            },
-            initialState = initialState,
-        )
-        val turbines = turbinesWithInitialStateCheck(testSubject, initialState)
-
-        testSubject.event(Event.LoadSpecialFolderOptions)
-
-        turbines.assertThatAndStateTurbineConsumed {
-            isEqualTo(
-                State(
-                    isLoading = false,
-                    isSuccess = false,
-                    error = SpecialFoldersContract.Failure.MissingIncomingServerSettings(
-                        "No incoming server settings available",
-                    ),
-                ),
-            )
-        }
-    }
-
-    @Test
     fun `should change to error state when LoadSpecialFolders fails with loading folder failure`() = runTest {
         val initialState = State(
             isLoading = true,
