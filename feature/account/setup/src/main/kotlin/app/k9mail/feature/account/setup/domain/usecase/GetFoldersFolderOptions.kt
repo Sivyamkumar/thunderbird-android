@@ -72,7 +72,7 @@ class GetFoldersFolderOptions(
             FolderType.SENT,
             FolderType.SPAM,
             FolderType.TRASH,
-            -> SpecialFolderOption.SpecialFolder(isAutomatic, remoteFolder)
+            -> SpecialFolderOption.Special(isAutomatic, remoteFolder)
 
             FolderType.REGULAR -> SpecialFolderOption.Regular(remoteFolder)
         }

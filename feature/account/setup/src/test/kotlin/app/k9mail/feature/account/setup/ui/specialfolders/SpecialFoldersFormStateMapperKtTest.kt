@@ -14,54 +14,54 @@ class SpecialFoldersFormStateMapperKtTest {
 
     @Test
     fun `should map folders to form state and assign selected folders`() = runTest {
-        val specialFolderOptions = SpecialFolderOptions(
+        val specialOptions = SpecialFolderOptions(
             archiveSpecialFolderOptions = createFolderList(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = createRemoteFolder("archive1"),
                     isAutomatic = true,
                 ),
             ),
             draftsSpecialFolderOptions = createFolderList(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = createRemoteFolder("drafts1"),
                     isAutomatic = true,
                 ),
             ),
             sentSpecialFolderOptions = createFolderList(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = createRemoteFolder("sent1"),
                     isAutomatic = true,
                 ),
             ),
             spamSpecialFolderOptions = createFolderList(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = createRemoteFolder("spam1"),
                     isAutomatic = true,
                 ),
             ),
             trashSpecialFolderOptions = createFolderList(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = createRemoteFolder("trash1"),
                     isAutomatic = true,
                 ),
             ),
         )
 
-        val result = specialFolderOptions.toFormState()
+        val result = specialOptions.toFormState()
 
         assertThat(result).isEqualTo(
             SpecialFoldersContract.FormState(
-                archiveSpecialFolderOptions = specialFolderOptions.archiveSpecialFolderOptions,
-                draftsSpecialFolderOptions = specialFolderOptions.draftsSpecialFolderOptions,
-                sentSpecialFolderOptions = specialFolderOptions.sentSpecialFolderOptions,
-                spamSpecialFolderOptions = specialFolderOptions.spamSpecialFolderOptions,
-                trashSpecialFolderOptions = specialFolderOptions.trashSpecialFolderOptions,
+                archiveSpecialFolderOptions = specialOptions.archiveSpecialFolderOptions,
+                draftsSpecialFolderOptions = specialOptions.draftsSpecialFolderOptions,
+                sentSpecialFolderOptions = specialOptions.sentSpecialFolderOptions,
+                spamSpecialFolderOptions = specialOptions.spamSpecialFolderOptions,
+                trashSpecialFolderOptions = specialOptions.trashSpecialFolderOptions,
 
-                selectedArchiveSpecialFolderOption = specialFolderOptions.archiveSpecialFolderOptions.first(),
-                selectedDraftsSpecialFolderOption = specialFolderOptions.draftsSpecialFolderOptions.first(),
-                selectedSentSpecialFolderOption = specialFolderOptions.sentSpecialFolderOptions.first(),
-                selectedSpamSpecialFolderOption = specialFolderOptions.spamSpecialFolderOptions.first(),
-                selectedTrashSpecialFolderOption = specialFolderOptions.trashSpecialFolderOptions.first(),
+                selectedArchiveSpecialFolderOption = specialOptions.archiveSpecialFolderOptions.first(),
+                selectedDraftsSpecialFolderOption = specialOptions.draftsSpecialFolderOptions.first(),
+                selectedSentSpecialFolderOption = specialOptions.sentSpecialFolderOptions.first(),
+                selectedSpamSpecialFolderOption = specialOptions.spamSpecialFolderOptions.first(),
+                selectedTrashSpecialFolderOption = specialOptions.trashSpecialFolderOptions.first(),
             ),
         )
     }

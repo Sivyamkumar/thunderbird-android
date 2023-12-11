@@ -112,31 +112,31 @@ class ValidateSpecialFolderOptionsTest {
 
         val SPECIAL_FOLDER_OPTIONS = SpecialFolderOptions(
             archiveSpecialFolderOptions = listOf(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     isAutomatic = true,
                     remoteFolder = Fabrikate().random(),
                 ),
             ),
             draftsSpecialFolderOptions = listOf(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     isAutomatic = true,
                     remoteFolder = Fabrikate().random(),
                 ),
             ),
             sentSpecialFolderOptions = listOf(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     isAutomatic = true,
                     remoteFolder = Fabrikate().random(),
                 ),
             ),
             spamSpecialFolderOptions = listOf(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     isAutomatic = true,
                     remoteFolder = Fabrikate().random(),
                 ),
             ),
             trashSpecialFolderOptions = listOf(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     isAutomatic = true,
                     remoteFolder = Fabrikate().random(),
                 ),

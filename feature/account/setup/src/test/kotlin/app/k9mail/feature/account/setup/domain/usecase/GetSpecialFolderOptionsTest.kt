@@ -42,17 +42,7 @@ class GetSpecialFolderOptionsTest {
     @Test
     fun `should map remote folders to Folders`() = runTest {
         val testSubject = createTestSubject(
-            folderFetcher = FakeFolderFetcher(
-                folders = listOf(
-                    ARCHIVE_FOLDER_1,
-                    DRAFTS_FOLDER_1,
-                    SENT_FOLDER_1,
-                    SPAM_FOLDER_1,
-                    TRASH_FOLDER_1,
-                    REGULAR_FOLDER_1,
-                    REGULAR_FOLDER_2,
-                ),
-            ),
+            folderFetcher = FakeFolderFetcher(folders = FOLDERS),
             accountStateRepository = InMemoryAccountStateRepository(
                 state = AccountState(
                     incomingServerSettings = SERVER_SETTINGS,
@@ -64,7 +54,7 @@ class GetSpecialFolderOptionsTest {
 
         assertThat(folders.archiveSpecialFolderOptions).containsExactly(
             *getArrayOfFolders(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = ARCHIVE_FOLDER_1,
                     isAutomatic = true,
                 ),
@@ -72,7 +62,7 @@ class GetSpecialFolderOptionsTest {
         )
         assertThat(folders.draftsSpecialFolderOptions).containsExactly(
             *getArrayOfFolders(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = DRAFTS_FOLDER_1,
                     isAutomatic = true,
                 ),
@@ -80,7 +70,7 @@ class GetSpecialFolderOptionsTest {
         )
         assertThat(folders.sentSpecialFolderOptions).containsExactly(
             *getArrayOfFolders(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = SENT_FOLDER_1,
                     isAutomatic = true,
                 ),
@@ -88,7 +78,7 @@ class GetSpecialFolderOptionsTest {
         )
         assertThat(folders.spamSpecialFolderOptions).containsExactly(
             *getArrayOfFolders(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = SPAM_FOLDER_1,
                     isAutomatic = true,
                 ),
@@ -96,7 +86,7 @@ class GetSpecialFolderOptionsTest {
         )
         assertThat(folders.trashSpecialFolderOptions).containsExactly(
             *getArrayOfFolders(
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = TRASH_FOLDER_1,
                     isAutomatic = true,
                 ),
@@ -133,31 +123,31 @@ class GetSpecialFolderOptionsTest {
         val folders = testSubject()
 
         assertThat(folders.archiveSpecialFolderOptions[0]).isEqualTo(
-            SpecialFolderOption.SpecialFolder(
+            SpecialFolderOption.Special(
                 remoteFolder = ARCHIVE_FOLDER_2,
                 isAutomatic = true,
             ),
         )
         assertThat(folders.draftsSpecialFolderOptions[0]).isEqualTo(
-            SpecialFolderOption.SpecialFolder(
+            SpecialFolderOption.Special(
                 remoteFolder = DRAFTS_FOLDER_2,
                 isAutomatic = true,
             ),
         )
         assertThat(folders.sentSpecialFolderOptions[0]).isEqualTo(
-            SpecialFolderOption.SpecialFolder(
+            SpecialFolderOption.Special(
                 remoteFolder = SENT_FOLDER_2,
                 isAutomatic = true,
             ),
         )
         assertThat(folders.spamSpecialFolderOptions[0]).isEqualTo(
-            SpecialFolderOption.SpecialFolder(
+            SpecialFolderOption.Special(
                 remoteFolder = SPAM_FOLDER_2,
                 isAutomatic = true,
             ),
         )
         assertThat(folders.trashSpecialFolderOptions[0]).isEqualTo(
-            SpecialFolderOption.SpecialFolder(
+            SpecialFolderOption.Special(
                 remoteFolder = TRASH_FOLDER_2,
                 isAutomatic = true,
             ),
@@ -289,23 +279,33 @@ class GetSpecialFolderOptionsTest {
             type = FolderType.REGULAR,
         )
 
+        val FOLDERS = listOf(
+            ARCHIVE_FOLDER_1,
+            DRAFTS_FOLDER_1,
+            SENT_FOLDER_1,
+            SPAM_FOLDER_1,
+            TRASH_FOLDER_1,
+            REGULAR_FOLDER_1,
+            REGULAR_FOLDER_2,
+        )
+
         fun getArrayOfFolders(defaultSpecialFolderOption: SpecialFolderOption?): Array<SpecialFolderOption> {
             return listOfNotNull(
                 defaultSpecialFolderOption,
                 SpecialFolderOption.None(),
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = ARCHIVE_FOLDER_1,
                 ),
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = DRAFTS_FOLDER_1,
                 ),
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = SENT_FOLDER_1,
                 ),
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = SPAM_FOLDER_1,
                 ),
-                SpecialFolderOption.SpecialFolder(
+                SpecialFolderOption.Special(
                     remoteFolder = TRASH_FOLDER_1,
                 ),
                 SpecialFolderOption.Regular(REGULAR_FOLDER_1),

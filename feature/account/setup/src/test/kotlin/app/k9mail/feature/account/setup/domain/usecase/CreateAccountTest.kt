@@ -80,19 +80,19 @@ class CreateAccountTest {
         const val AUTHORIZATION_STATE = "authorization state"
 
         val SPECIAL_FOLDER_SETTINGS = SpecialFolderSettings(
-            archiveSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            archiveSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(FolderServerId("archive"), "archive", FolderType.ARCHIVE),
             ),
-            draftsSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            draftsSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(FolderServerId("drafts"), "drafts", FolderType.DRAFTS),
             ),
-            sentSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            sentSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(FolderServerId("sent"), "sent", FolderType.SENT),
             ),
-            spamSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            spamSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(FolderServerId("spam"), "spam", FolderType.SPAM),
             ),
-            trashSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            trashSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(FolderServerId("trash"), "trash", FolderType.TRASH),
             ),
         )

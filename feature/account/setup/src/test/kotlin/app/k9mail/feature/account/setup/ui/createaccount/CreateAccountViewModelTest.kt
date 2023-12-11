@@ -147,35 +147,35 @@ class CreateAccountViewModelTest {
         val AUTHORIZATION_STATE = AuthorizationState("authorization state")
 
         val SPECIAL_FOLDER_SETTINGS = SpecialFolderSettings(
-            archiveSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            archiveSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(
                     FolderServerId("archive folder"),
                     "archive folder",
                     FolderType.ARCHIVE,
                 ),
             ),
-            draftsSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            draftsSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(
                     FolderServerId("drafts folder"),
                     "drafts folder",
                     FolderType.DRAFTS,
                 ),
             ),
-            sentSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            sentSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(
                     FolderServerId("sent folder"),
                     "sent folder",
                     FolderType.SENT,
                 ),
             ),
-            spamSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            spamSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(
                     FolderServerId("spam folder"),
                     "spam folder",
                     FolderType.SPAM,
                 ),
             ),
-            trashSpecialFolderOption = SpecialFolderOption.SpecialFolder(
+            trashSpecialFolderOption = SpecialFolderOption.Special(
                 remoteFolder = RemoteFolder(
                     FolderServerId("trash folder"),
                     "trash folder",

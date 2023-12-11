@@ -11,7 +11,7 @@ sealed interface SpecialFolderOption {
         val remoteFolder: RemoteFolder,
     ) : SpecialFolderOption
 
-    data class SpecialFolder(
+    data class Special(
         val isAutomatic: Boolean = false,
         val remoteFolder: RemoteFolder,
     ) : SpecialFolderOption

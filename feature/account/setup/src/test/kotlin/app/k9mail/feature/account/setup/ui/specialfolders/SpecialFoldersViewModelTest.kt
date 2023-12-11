@@ -307,23 +307,23 @@ class SpecialFoldersViewModelTest {
 
         val REMOTE_FOLDER = RemoteFolder(FolderServerId("archive"), "archive", FolderType.ARCHIVE)
 
-        val SPECIAL_FOLDER_ARCHIVE = SpecialFolderOption.SpecialFolder(
+        val SPECIAL_FOLDER_ARCHIVE = SpecialFolderOption.Special(
             isAutomatic = false,
             remoteFolder = REMOTE_FOLDER.copy(displayName = "Archive"),
         )
-        val SPECIAL_FOLDER_DRAFTS = SpecialFolderOption.SpecialFolder(
+        val SPECIAL_FOLDER_DRAFTS = SpecialFolderOption.Special(
             isAutomatic = false,
             remoteFolder = REMOTE_FOLDER.copy(displayName = "Drafts"),
         )
-        val SPECIAL_FOLDER_SENT = SpecialFolderOption.SpecialFolder(
+        val SPECIAL_FOLDER_SENT = SpecialFolderOption.Special(
             isAutomatic = false,
             remoteFolder = REMOTE_FOLDER.copy(displayName = "Sent"),
         )
-        val SPECIAL_FOLDER_SPAM = SpecialFolderOption.SpecialFolder(
+        val SPECIAL_FOLDER_SPAM = SpecialFolderOption.Special(
             isAutomatic = false,
             remoteFolder = REMOTE_FOLDER.copy(displayName = "Spam"),
         )
-        val SPECIAL_FOLDER_TRASH = SpecialFolderOption.SpecialFolder(
+        val SPECIAL_FOLDER_TRASH = SpecialFolderOption.Special(
             isAutomatic = false,
             remoteFolder = REMOTE_FOLDER.copy(displayName = "Trash"),
         )
