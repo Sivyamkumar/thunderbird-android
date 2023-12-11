@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.setup.ui.specialfolders
 
+import app.k9mail.core.common.domain.usecase.validation.ValidationError
 import app.k9mail.core.common.domain.usecase.validation.ValidationResult
 import app.k9mail.core.ui.compose.testing.MainDispatcherRule
 import app.k9mail.core.ui.compose.testing.mvi.assertThatAndEffectTurbineConsumed
@@ -43,9 +44,8 @@ class SpecialFoldersViewModelTest {
                 isLoading = true,
             )
             val testSubject = createTestSubject(
-                formUiModel = FakeSpecialFoldersFormUiModel(
-                    isValid = true,
-                ),
+                formUiModel = FakeSpecialFoldersFormUiModel(),
+                validateSpecialFolderOptions = { ValidationResult.Success },
                 accountStateRepository = accountStateRepository,
                 initialState = initialState,
             )
@@ -53,9 +53,9 @@ class SpecialFoldersViewModelTest {
 
             testSubject.event(Event.LoadSpecialFolderOptions)
 
-            val populatedState = initialState.copy(
-                isLoading = true,
-                isSuccess = false,
+            val validatedState = initialState.copy(
+                isLoading = false,
+                isSuccess = true,
                 formState = FormState(
                     archiveSpecialFolderOptions = SpecialFolderOptions.archiveSpecialFolderOptions,
                     draftsSpecialFolderOptions = SpecialFolderOptions.draftsSpecialFolderOptions,
@@ -71,20 +71,8 @@ class SpecialFoldersViewModelTest {
                 ),
             )
 
-            assertThat(turbines.awaitStateItem()).isEqualTo(populatedState)
-
-            val validatingState = populatedState.copy(
-                isLoading = true,
-                isSuccess = true,
-            )
-            assertThat(turbines.awaitStateItem()).isEqualTo(validatingState)
-
-            val successState = populatedState.copy(
-                isLoading = false,
-                isSuccess = true,
-            )
             turbines.assertThatAndStateTurbineConsumed {
-                isEqualTo(successState)
+                isEqualTo(validatedState)
             }
 
             turbines.assertThatAndEffectTurbineConsumed {
@@ -111,9 +99,8 @@ class SpecialFoldersViewModelTest {
             isLoading = true,
         )
         val testSubject = createTestSubject(
-            formUiModel = FakeSpecialFoldersFormUiModel(
-                isValid = false,
-            ),
+            formUiModel = FakeSpecialFoldersFormUiModel(),
+            validateSpecialFolderOptions = { ValidationResult.Failure(TestValidationError) },
             accountStateRepository = accountStateRepository,
             initialState = initialState,
         )
@@ -121,8 +108,8 @@ class SpecialFoldersViewModelTest {
 
         testSubject.event(Event.LoadSpecialFolderOptions)
 
-        val populatedState = initialState.copy(
-            isLoading = true,
+        val unvalidatedState = initialState.copy(
+            isLoading = false,
             isSuccess = false,
             formState = FormState(
                 archiveSpecialFolderOptions = SpecialFolderOptions.archiveSpecialFolderOptions,
@@ -139,14 +126,8 @@ class SpecialFoldersViewModelTest {
             ),
         )
 
-        assertThat(turbines.awaitStateItem()).isEqualTo(populatedState)
-
-        val validatingState = populatedState.copy(
-            isLoading = false,
-            isSuccess = false,
-        )
         turbines.assertThatAndStateTurbineConsumed {
-            isEqualTo(validatingState)
+            isEqualTo(unvalidatedState)
         }
 
         turbines.effectTurbine.ensureAllEventsConsumed()
@@ -160,9 +141,7 @@ class SpecialFoldersViewModelTest {
             isLoading = true,
         )
         val testSubject = createTestSubject(
-            formUiModel = FakeSpecialFoldersFormUiModel(
-                isValid = false,
-            ),
+            formUiModel = FakeSpecialFoldersFormUiModel(),
             getSpecialFolderOptions = {
                 throw IllegalStateException("No incoming server settings available")
             },
@@ -191,9 +170,7 @@ class SpecialFoldersViewModelTest {
             isLoading = true,
         )
         val testSubject = createTestSubject(
-            formUiModel = FakeSpecialFoldersFormUiModel(
-                isValid = false,
-            ),
+            formUiModel = FakeSpecialFoldersFormUiModel(),
             getSpecialFolderOptions = {
                 throw FolderFetcherException(IllegalStateException("Failed to load folders"))
             },
@@ -239,16 +216,36 @@ class SpecialFoldersViewModelTest {
     }
 
     @Test
-    fun `should emit NavigateNext effect when OnNextClicked event received`() = runTest {
+    fun `should save form data and emit NavigateNext effect when OnNextClicked event received`() = runTest {
         val initialState = State(isSuccess = true)
-        val testSubject = createTestSubject(initialState = initialState)
+        val accountStateRepository = InMemoryAccountStateRepository()
+        val testSubject = createTestSubject(
+            initialState = initialState,
+            accountStateRepository = accountStateRepository,
+        )
         val turbines = turbinesWithInitialStateCheck(testSubject, initialState)
 
         testSubject.event(Event.OnNextClicked)
 
+        turbines.assertThatAndStateTurbineConsumed {
+            isEqualTo(initialState.copy(isLoading = false))
+        }
+
         turbines.assertThatAndEffectTurbineConsumed {
             isEqualTo(Effect.NavigateNext)
         }
+
+        assertThat(accountStateRepository.getState()).isEqualTo(
+            AccountState(
+                specialFolderSettings = SpecialFolderSettings(
+                    archiveSpecialFolderOption = SpecialFolderOption.None(isAutomatic = true),
+                    draftsSpecialFolderOption = SpecialFolderOption.None(isAutomatic = true),
+                    sentSpecialFolderOption = SpecialFolderOption.None(isAutomatic = true),
+                    spamSpecialFolderOption = SpecialFolderOption.None(isAutomatic = true),
+                    trashSpecialFolderOption = SpecialFolderOption.None(isAutomatic = true),
+                ),
+            ),
+        )
     }
 
     @Test
@@ -289,10 +286,13 @@ class SpecialFoldersViewModelTest {
         }
     }
 
+    private object TestValidationError : ValidationError
+
     private companion object {
         fun createTestSubject(
             formUiModel: SpecialFoldersContract.FormUiModel = FakeSpecialFoldersFormUiModel(),
             getSpecialFolderOptions: () -> SpecialFolderOptions = { SpecialFolderOptions },
+            validateSpecialFolderOptions: (SpecialFolderOptions) -> ValidationResult = { ValidationResult.Success },
             accountStateRepository: AccountDomainContract.AccountStateRepository = InMemoryAccountStateRepository(),
             initialState: State = State(),
         ) = SpecialFoldersViewModel(
@@ -301,9 +301,7 @@ class SpecialFoldersViewModelTest {
                 delay(50)
                 getSpecialFolderOptions()
             },
-            validateSpecialFolderOptions = {
-                ValidationResult.Success
-            },
+            validateSpecialFolderOptions = validateSpecialFolderOptions,
             accountStateRepository = accountStateRepository,
             initialState = initialState,
         )

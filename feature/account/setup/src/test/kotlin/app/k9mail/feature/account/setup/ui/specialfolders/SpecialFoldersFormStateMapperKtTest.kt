@@ -87,11 +87,11 @@ class SpecialFoldersFormStateMapperKtTest {
                 spamSpecialFolderOptions = specialFolderOptions.spamSpecialFolderOptions,
                 trashSpecialFolderOptions = specialFolderOptions.trashSpecialFolderOptions,
 
-                selectedArchiveSpecialFolderOption = null,
-                selectedDraftsSpecialFolderOption = null,
-                selectedSentSpecialFolderOption = null,
-                selectedSpamSpecialFolderOption = null,
-                selectedTrashSpecialFolderOption = null,
+                selectedArchiveSpecialFolderOption = specialFolderOptions.archiveSpecialFolderOptions.first(),
+                selectedDraftsSpecialFolderOption = specialFolderOptions.draftsSpecialFolderOptions.first(),
+                selectedSentSpecialFolderOption = specialFolderOptions.sentSpecialFolderOptions.first(),
+                selectedSpamSpecialFolderOption = specialFolderOptions.spamSpecialFolderOptions.first(),
+                selectedTrashSpecialFolderOption = specialFolderOptions.trashSpecialFolderOptions.first(),
             ),
         )
     }

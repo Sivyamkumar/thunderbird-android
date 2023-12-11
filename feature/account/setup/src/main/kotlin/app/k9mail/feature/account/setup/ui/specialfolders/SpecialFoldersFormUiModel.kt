@@ -46,12 +46,4 @@ class SpecialFoldersFormUiModel : FormUiModel {
             selectedTrashSpecialFolderOption = specialFolderOption,
         )
     }
-
-    override fun validate(formState: FormState): Boolean {
-        return formState.selectedArchiveSpecialFolderOption != null &&
-            formState.selectedDraftsSpecialFolderOption != null &&
-            formState.selectedSentSpecialFolderOption != null &&
-            formState.selectedSpamSpecialFolderOption != null &&
-            formState.selectedTrashSpecialFolderOption != null
-    }
 }

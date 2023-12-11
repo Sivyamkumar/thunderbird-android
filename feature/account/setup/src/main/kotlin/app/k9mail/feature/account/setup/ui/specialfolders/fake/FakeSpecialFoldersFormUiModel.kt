@@ -4,9 +4,7 @@ import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormState
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormUiModel
 
-class FakeSpecialFoldersFormUiModel(
-    private val isValid: Boolean = false,
-) : FormUiModel {
+class FakeSpecialFoldersFormUiModel : FormUiModel {
 
     val events = mutableListOf<FormEvent>()
 
@@ -16,9 +14,5 @@ class FakeSpecialFoldersFormUiModel(
     ): FormState {
         events.add(event)
         return formState
-    }
-
-    override fun validate(formState: FormState): Boolean {
-        return isValid
     }
 }

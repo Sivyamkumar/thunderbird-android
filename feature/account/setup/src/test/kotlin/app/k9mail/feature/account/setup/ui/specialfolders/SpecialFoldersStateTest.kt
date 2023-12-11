@@ -1,5 +1,6 @@
 package app.k9mail.feature.account.setup.ui.specialfolders
 
+import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormState
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.State
 import assertk.assertThat
@@ -34,11 +35,11 @@ class SpecialFoldersStateTest {
                 spamSpecialFolderOptions = emptyList(),
                 trashSpecialFolderOptions = emptyList(),
 
-                selectedArchiveSpecialFolderOption = null,
-                selectedDraftsSpecialFolderOption = null,
-                selectedSentSpecialFolderOption = null,
-                selectedSpamSpecialFolderOption = null,
-                selectedTrashSpecialFolderOption = null,
+                selectedArchiveSpecialFolderOption = SpecialFolderOption.None(true),
+                selectedDraftsSpecialFolderOption = SpecialFolderOption.None(true),
+                selectedSentSpecialFolderOption = SpecialFolderOption.None(true),
+                selectedSpamSpecialFolderOption = SpecialFolderOption.None(true),
+                selectedTrashSpecialFolderOption = SpecialFolderOption.None(true),
             ),
         )
     }

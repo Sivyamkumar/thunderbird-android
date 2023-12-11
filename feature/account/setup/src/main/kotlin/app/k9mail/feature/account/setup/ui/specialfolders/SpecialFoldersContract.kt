@@ -10,7 +10,6 @@ interface SpecialFoldersContract {
 
     interface FormUiModel {
         fun event(event: FormEvent, formState: FormState): FormState
-        fun validate(formState: FormState): Boolean
     }
 
     data class State(
@@ -28,11 +27,11 @@ interface SpecialFoldersContract {
         val spamSpecialFolderOptions: List<SpecialFolderOption> = emptyList(),
         val trashSpecialFolderOptions: List<SpecialFolderOption> = emptyList(),
 
-        val selectedArchiveSpecialFolderOption: SpecialFolderOption? = null,
-        val selectedDraftsSpecialFolderOption: SpecialFolderOption? = null,
-        val selectedSentSpecialFolderOption: SpecialFolderOption? = null,
-        val selectedSpamSpecialFolderOption: SpecialFolderOption? = null,
-        val selectedTrashSpecialFolderOption: SpecialFolderOption? = null,
+        val selectedArchiveSpecialFolderOption: SpecialFolderOption = SpecialFolderOption.None(true),
+        val selectedDraftsSpecialFolderOption: SpecialFolderOption = SpecialFolderOption.None(true),
+        val selectedSentSpecialFolderOption: SpecialFolderOption = SpecialFolderOption.None(true),
+        val selectedSpamSpecialFolderOption: SpecialFolderOption = SpecialFolderOption.None(true),
+        val selectedTrashSpecialFolderOption: SpecialFolderOption = SpecialFolderOption.None(true),
     )
 
     sealed interface Event {

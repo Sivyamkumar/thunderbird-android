@@ -8,7 +8,6 @@ import assertk.assertions.isEqualTo
 import com.fsck.k9.mail.FolderType
 import com.fsck.k9.mail.folders.FolderServerId
 import com.fsck.k9.mail.folders.RemoteFolder
-import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 class SpecialFoldersFormUiModelTest {
@@ -60,48 +59,6 @@ class SpecialFoldersFormUiModelTest {
         assertThat(result).isEqualTo(FORM_STATE.copy(selectedTrashSpecialFolderOption = folder))
     }
 
-    @Test
-    fun `validate should return true when all folders are selected`() = runTest {
-        val result = testSubject.validate(FORM_STATE_WITH_SELECTION)
-
-        assertThat(result).isEqualTo(true)
-    }
-
-    @Test
-    fun `validate should return false when one of the folders is not selected`() = runTest {
-        val archiveResult = testSubject.validate(
-            FORM_STATE_WITH_SELECTION.copy(
-                selectedArchiveSpecialFolderOption = null,
-            ),
-        )
-        val draftsResult = testSubject.validate(
-            FORM_STATE_WITH_SELECTION.copy(
-                selectedDraftsSpecialFolderOption = null,
-            ),
-        )
-        val sentResult = testSubject.validate(
-            FORM_STATE_WITH_SELECTION.copy(
-                selectedSentSpecialFolderOption = null,
-            ),
-        )
-        val spamResult = testSubject.validate(
-            FORM_STATE_WITH_SELECTION.copy(
-                selectedSpamSpecialFolderOption = null,
-            ),
-        )
-        val trashResult = testSubject.validate(
-            FORM_STATE_WITH_SELECTION.copy(
-                selectedTrashSpecialFolderOption = null,
-            ),
-        )
-
-        assertThat(archiveResult).isEqualTo(false)
-        assertThat(draftsResult).isEqualTo(false)
-        assertThat(sentResult).isEqualTo(false)
-        assertThat(spamResult).isEqualTo(false)
-        assertThat(trashResult).isEqualTo(false)
-    }
-
     private companion object {
         val FORM_STATE = FormState(
             archiveSpecialFolderOptions = listOf(createFolder("archiveFolder")),
@@ -109,14 +66,6 @@ class SpecialFoldersFormUiModelTest {
             sentSpecialFolderOptions = listOf(createFolder("sentFolder")),
             spamSpecialFolderOptions = listOf(createFolder("spamFolder")),
             trashSpecialFolderOptions = listOf(createFolder("trashFolder")),
-        )
-
-        val FORM_STATE_WITH_SELECTION = FORM_STATE.copy(
-            selectedArchiveSpecialFolderOption = createFolder("archiveFolder"),
-            selectedDraftsSpecialFolderOption = createFolder("draftsFolder"),
-            selectedSentSpecialFolderOption = createFolder("sentFolder"),
-            selectedSpamSpecialFolderOption = createFolder("spamFolder"),
-            selectedTrashSpecialFolderOption = createFolder("trashFolder"),
         )
 
         fun createFolder(folderName: String): SpecialFolderOption {

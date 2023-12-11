@@ -1,8 +1,6 @@
 package app.k9mail.feature.account.setup.ui.specialfolders
 
-import app.k9mail.feature.account.common.domain.entity.SpecialFolderOption
 import app.k9mail.feature.account.common.domain.entity.SpecialFolderOptions
-import app.k9mail.feature.account.common.domain.entity.SpecialSpecialFolderOption
 import app.k9mail.feature.account.setup.ui.specialfolders.SpecialFoldersContract.FormState
 
 fun SpecialFolderOptions.toFormState(): FormState {
@@ -13,16 +11,10 @@ fun SpecialFolderOptions.toFormState(): FormState {
         spamSpecialFolderOptions = spamSpecialFolderOptions,
         trashSpecialFolderOptions = trashSpecialFolderOptions,
 
-        selectedArchiveSpecialFolderOption = archiveSpecialFolderOptions.mapToDefaultFolder(),
-        selectedDraftsSpecialFolderOption = draftsSpecialFolderOptions.mapToDefaultFolder(),
-        selectedSentSpecialFolderOption = sentSpecialFolderOptions.mapToDefaultFolder(),
-        selectedSpamSpecialFolderOption = spamSpecialFolderOptions.mapToDefaultFolder(),
-        selectedTrashSpecialFolderOption = trashSpecialFolderOptions.mapToDefaultFolder(),
+        selectedArchiveSpecialFolderOption = archiveSpecialFolderOptions.first(),
+        selectedDraftsSpecialFolderOption = draftsSpecialFolderOptions.first(),
+        selectedSentSpecialFolderOption = sentSpecialFolderOptions.first(),
+        selectedSpamSpecialFolderOption = spamSpecialFolderOptions.first(),
+        selectedTrashSpecialFolderOption = trashSpecialFolderOptions.first(),
     )
-}
-
-private fun List<SpecialFolderOption>.mapToDefaultFolder(): SpecialFolderOption? {
-    return firstOrNull {
-        (it is SpecialSpecialFolderOption && it.isAutomatic)
-    }
 }
